@@ -8,7 +8,9 @@ import 'package:new_app/settings/settings_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
-  const HomeScreen({super.key,});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,34 +20,38 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:const BoxDecoration(
+      decoration: const BoxDecoration(
           color: AppTheme.white,
           image: DecorationImage(
               image: AssetImage("assets/images/pattern.png"),
               fit: BoxFit.fill)),
       child: Scaffold(
         appBar: AppBar(
-          title:const Text("News App"),
+          title: const Text("News App"),
         ),
-        drawer:HomeDrawer(
-          onItemSelected:onDrawerItemSelected),
-        body:selectedCategory!=null?CategoryDetails(selectedCategory!.id):
-        selectedDrawerItem==DrawerItem.categories?
-        CategoriesGrid(onCategorySelected:onselectedCategory ,):
-        const SettingsTab(),
+        drawer: HomeDrawer(onItemSelected: onDrawerItemSelected),
+        body: selectedCategory != null
+            ? CategoryDetails(selectedCategory!.id)
+            : selectedDrawerItem == DrawerItem.categories
+                ? CategoriesGrid(
+                    onCategorySelected: onselectedCategory,
+                  )
+                : const SettingsTab(),
       ),
     );
   }
-  DrawerItem selectedDrawerItem=DrawerItem.categories;
+
+  DrawerItem selectedDrawerItem = DrawerItem.categories;
   CategoryModel? selectedCategory;
-  void onDrawerItemSelected(DrawerItem drawerItem){
-  selectedDrawerItem=drawerItem;
-  selectedCategory=null;
-  setState(() {});
-  Navigator.of(context).pop();
+  void onDrawerItemSelected(DrawerItem drawerItem) {
+    selectedDrawerItem = drawerItem;
+    selectedCategory = null;
+    setState(() {});
+    Navigator.of(context).pop();
   }
-  void onselectedCategory(CategoryModel categoryModel){
-    selectedCategory=categoryModel;
+
+  void onselectedCategory(CategoryModel categoryModel) {
+    selectedCategory = categoryModel;
     setState(() {});
   }
 }
