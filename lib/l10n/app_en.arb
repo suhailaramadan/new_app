@@ -1,3 +1,19 @@
 {
-    "newsApp":"News App"
+    "newsApp":"News App",
+    "settings":"Settings",
+    "category":"Categories",
+    "sport":"Sports",
+    "general":"General",
+    "health":"Health",
+    "bussiness":"Bussiness",
+    "entertain":"Entertainment",
+    "science":"Science",
+    "pick":"Pick your category of interest",
+    "error":"SomeThing went wrong!",
+    "tryagain":"try again",
+    "suggest":"Suggestions..",
+    "lang":"Language",
+    "selectLang":"Select Language",
+    "english":"English",
+    "arabic":"Arabic"
 }

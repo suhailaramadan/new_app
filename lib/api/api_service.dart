@@ -5,7 +5,7 @@ import 'package:new_app/models/news_response/news_response.dart';
 import 'package:new_app/models/source_response/source_response.dart';
 
 class APIService {
-  static Future<SourceResponse> getSources(String categoryId) async {
+  static Future<SourceResponse> getSources(String? categoryId) async {
     final url = Uri.https(APIConstance.baseURL, APIConstance.sourceEndpoit,
         {"apiKey": APIConstance.apiKey, "category": categoryId});
     final response = await http.get(url);
@@ -13,9 +13,15 @@ class APIService {
     return SourceResponse.fromJson(json);
   }
 
-  static Future<NewsResponse> getNews(String categoryId) async {
-    final url = Uri.https(APIConstance.baseURL, APIConstance.newsEndpoit,
-        {"apiKey": APIConstance.apiKey, "sources": categoryId});
+  static Future<NewsResponse> getNews(
+      {String? categoryId, String? query}) async {
+    final url = Uri.https(APIConstance.baseURL, APIConstance.newsEndpoit, {
+      "apiKey": APIConstance.apiKey,
+      "sources": categoryId,
+      "q": query,
+      // "pageSize": pageSize.toString(),
+      // "page": page
+    });
     final response = await http.get(url);
     final json = jsonDecode(response.body);
     return NewsResponse.fromJson(json);

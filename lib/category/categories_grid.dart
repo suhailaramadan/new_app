@@ -2,43 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:new_app/app_theme.dart';
 import 'package:new_app/category/category_item.dart';
 import 'package:new_app/category/category_model.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CategoriesGrid extends StatelessWidget {
   const CategoriesGrid({super.key, required this.onCategorySelected});
   final void Function(CategoryModel) onCategorySelected;
   @override
   Widget build(BuildContext context) {
-    const List<CategoryModel> categories = [
+    List<CategoryModel> categories = [
       CategoryModel(
           id: "sports",
           color: AppTheme.red,
           imageName: "ball",
-          name: "Sport"),
+          name:AppLocalizations.of(context)!.sport),
       CategoryModel(
-          id: "politics",
+          id: "general",
           color: AppTheme.blue,
           imageName: "Politics",
-          name: "Politics"),
+          name:AppLocalizations.of(context)!.general),
       CategoryModel(
           id: "health",
           color: AppTheme.pink,
           imageName: "health",
-          name: "Health"),
+          name:AppLocalizations.of(context)!.health),
       CategoryModel(
           id: "business",
           color: AppTheme.brown,
           imageName: "bussines",
-          name: "Bussiness"),
+          name: AppLocalizations.of(context)!.bussiness),
       CategoryModel(
           id: "entertainment",
           color: AppTheme.cly,
           imageName: "environment",
-          name: "Environment"),
+          name: AppLocalizations.of(context)!.entertain),
       CategoryModel(
           id: "science",
           color: AppTheme.yollow,
           imageName: "science",
-          name: "Science")
+          name:AppLocalizations.of(context)!.science)
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -48,11 +48,11 @@ class CategoriesGrid extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24.0),
             child: Text(
-              "Pick your category of interest",
+              AppLocalizations.of(context)!.pick,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: AppTheme.navy),
+                  ?.copyWith(color: AppTheme.navy,fontSize: 28),
             ),
           ),
           Expanded(

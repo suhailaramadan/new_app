@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/app_theme.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key, required this.onItemSelected});
   final void Function(DrawerItem) onItemSelected;
   @override
   Widget build(BuildContext context) {
     final titleLargeStyle =
-        Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 24);
+        Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 25);
     final screanSize = MediaQuery.of(context).size;
     return SizedBox(
       width: screanSize.width * .7,
@@ -15,17 +15,17 @@ class HomeDrawer extends StatelessWidget {
         children: [
           Container(
             color: AppTheme.primary,
-            height: screanSize.height * .2,
+            height: screanSize.height * .18,
             alignment: Alignment.center,
             width: double.infinity,
             child: Text(
-              "News App",
+              AppLocalizations.of(context)!.newsApp,
               style: titleLargeStyle,
             ),
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(15),
               color: AppTheme.white,
               child: Column(
                 children: [
@@ -41,7 +41,7 @@ class HomeDrawer extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          "Categories",
+                          AppLocalizations.of(context)!.category,
                           style:
                               titleLargeStyle?.copyWith(color: AppTheme.black),
                         )
@@ -63,7 +63,7 @@ class HomeDrawer extends StatelessWidget {
                           width: 8,
                         ),
                         Text(
-                          "Settings",
+                          AppLocalizations.of(context)!.settings,
                           style:
                               titleLargeStyle?.copyWith(color: AppTheme.black),
                         )

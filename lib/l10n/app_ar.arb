@@ -1,3 +1,19 @@
 {
-    "newsApp":"تطبيق الاخبار"
+    "newsApp":"برنامج الأخبار",
+    "settings":"الإعدادات",
+    "category":"الفئات",
+    "sport":"الرياضة",
+    "general":"عام",
+    "health":"الصحة",
+    "bussiness":"الأعمال",
+    "entertain":"الترفيه",
+    "science":"العلوم",
+    "pick":"اختر فئة اهتمامك",
+    "error":"حدث خطأ ما",
+    "tryagain":"حاول مجددا",
+    "suggest":"اقتراحات..",
+    "lang":"اللغة",
+    "selectLang":"اختر اللغة",
+    "english":"الإنجليزية",
+    "arabic":"العربية"
 }

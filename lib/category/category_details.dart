@@ -21,7 +21,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingIndicator();
         } else if (snapshot.hasError || snapshot.data?.status != "ok") {
-          return const ErrorIndicator();
+          return ErrorIndicator(onPressed: (_)=>APIService.getSources(widget.categoryId),sourceId: widget.categoryId,);
         } else {
           final sources = snapshot.data?.sources ?? [];
           return SourcesTabs(sources: sources);

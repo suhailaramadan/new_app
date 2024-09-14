@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/app_theme.dart';
 import 'package:new_app/models/news_response/article.dart';
+import 'package:new_app/news/news_details.dart';
+import 'package:new_app/widgets/loading_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
@@ -16,7 +18,34 @@ class NewsItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Image.network(
-              news.urlToImage ?? "",
+              news.urlToImage ??"",
+              loadingBuilder: (context, child, loadingProgress) {
+                if(loadingProgress==null){
+                  return child;
+                }
+                else{
+                  return const LoadingIndicator();
+                }
+              },
+              errorBuilder: (context, error, stackTrace) => Container(
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height * .25,
+                  width: double.infinity,
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          color: AppTheme.red,
+                        ),
+                        Text("No image !")
+                      ],
+                    ),
+                  ),
+                ),
               height: MediaQuery.of(context).size.height * .25,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -33,12 +62,19 @@ class NewsItem extends StatelessWidget {
           const SizedBox(
             height: 4,
           ),
-          Text(
-            news.title ?? "",
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: AppTheme.navy),
+          InkWell(
+            onTap: (){
+              Navigator.of(context).pushNamed(NewsDetails.routeName,arguments:
+                news 
+              );
+            },
+            child: Text(
+              news.title ?? "",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: AppTheme.navy),
+            ),
           ),
           Align(
               alignment: Alignment.topRight,
@@ -53,4 +89,5 @@ class NewsItem extends StatelessWidget {
       ),
     );
   }
+
 }

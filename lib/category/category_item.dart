@@ -29,7 +29,7 @@ class CategoryItem extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(fontWeight: FontWeight.w400),
+                ?.copyWith(fontWeight: FontWeight.w700),
           ),
         ],
       ),
