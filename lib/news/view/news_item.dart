@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:new_app/shared/app_theme.dart';
 import 'package:new_app/news/data/model/news_response/news.dart';
@@ -17,34 +18,29 @@ class NewsItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
-            child: Image.network(
-              news.urlToImage ?? "",
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) {
-                  return child;
-                } else {
-                  return const LoadingIndicator();
-                }
-              },
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: Colors.grey[200],
-                padding: const EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height * .25,
-                width: double.infinity,
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: AppTheme.red,
-                      ),
-                      Text("No image !")
-                    ],
-                  ),
-                ),
-              ),
+            child:CachedNetworkImage(
+              imageUrl: news.urlToImage ?? "",
+              placeholder:(context, url) => const LoadingIndicator(),
+              errorWidget:(context, url, error) =>const Icon(Icons.image_not_supported_outlined,size: 40,),
+              // (context, error, stackTrace) => Container(
+              //   color: Colors.grey[200],
+              //   padding: const EdgeInsets.all(10),
+              //   height: MediaQuery.of(context).size.height * .25,
+              //   width: double.infinity,
+              //   child: const Center(
+              //     child: Column(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Icon(
+              //           Icons.error,
+              //           color: AppTheme.red,
+              //         ),
+              //         Text("No image !")
+              //       ],
+              //     ),
+              //   ),
+              // ),
               height: MediaQuery.of(context).size.height * .25,
               width: double.infinity,
               fit: BoxFit.fill,
