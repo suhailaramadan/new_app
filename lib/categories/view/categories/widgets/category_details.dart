@@ -1,5 +1,9 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_app/sources/view/widgets/sources_tabs.dart';
+import 'package:new_app/sources/view_model/sources_states.dart';
 import 'package:new_app/sources/view_model/sources_view_model.dart';
 import 'package:new_app/shared/widget/error_indicator.dart';
 import 'package:new_app/shared/widget/loading_indicator.dart';
@@ -22,21 +26,25 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   }
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    BlocProvider.of<SourcesViewModel>(context);
+    return BlocProvider(
       create:(context) =>viewModel,
       
-      child:Consumer<SourcesViewModel>(builder: (context, viewModel, child){
-        if(viewModel.isLoading){
-        return LoadingIndicator();
+      child:BlocBuilder<SourcesViewModel,SourcesStates>(
+        builder: (context,state){
+        if(state is GetSourcesLoading){
+        return const LoadingIndicator();
         }
-        else if(viewModel.errorMessage!=null){
+        else if(state is GetSourcesError){
           return ErrorIndicator(
             onPressed:(_)=>viewModel.getSources(widget.categoryId),
-            errorMessage:viewModel.errorMessage!,);
+            errorMessage:state.errorMessage,);
         }
+        else if (state is GetSourcesSuccess){
+        return SourcesTabs(sources:state.sources);}
         else{
-        return SourcesTabs(sources:viewModel.sources);}
-
+          return const SizedBox();
+        }
       })
     );
     // FutureBuilder(
